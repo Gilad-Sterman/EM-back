@@ -33,3 +33,14 @@ export async function updateExpenses(req, res) {
         res.status(500).send({ err: 'Failed to update expenses' })
     }
 }
+
+export async function updateRecurringExpenses(req, res) {
+    try {
+        const { userId, recurringExpenses } = req.body
+        const myRes = await userService.updateRecurringExpenses(userId, recurringExpenses)
+        res.send(myRes)
+    } catch (err) {
+        logger.error('Failed to update recurring expenses', err)
+        res.status(500).send({ err: 'Failed to update recurring expenses' })
+    }
+}
